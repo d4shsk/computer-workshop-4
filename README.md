@@ -18,7 +18,7 @@
       * Формат ответа: `{"author": "1160468"}`.
       * Заголовки ответов настроены на `application/json`.
 
-[![image.png](https://i.postimg.cc/PJkRhz1Y/image.png)](https://postimg.cc/hzpr1myt)
+![image.png](https://i.imgur.com/ubTIGs2.png)
 
 2.  **POST `/size2json`**:
 
@@ -26,10 +26,11 @@
       * Валидация: На стороне сервера реализована проверка типа файла. Если передан не PNG или файл поврежден, возвращается JSON `{"result": "invalid filetype"}`.
       * Обработка: С помощью библиотеки `image-size` сервер считывает буфер изображения и извлекает его реальную ширину и высоту.
       * Лимиты: Установлено ограничение на размер файла (10 МБ). При превышении возвращается сообщение `File too large`.
-      * 
-[![image.png](https://i.postimg.cc/QdPShJ3p/image.png)](https://postimg.cc/rD159Wzm)
+ 
+![image.png](https://i.imgur.com/ze6ehTz.png)
 
-[![image.png](https://i.postimg.cc/rFZNNNzg/image.png)](https://postimg.cc/56vzxvBF)
+![image.png](https://i.imgur.com/Rcgs2cF.png)
+
 #### 3\. Реализованные усложнения
 
 Проект выполнен с максимальным уровнем сложности:
