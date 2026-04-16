@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 4</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 50px auto; text-align: center; }
+        #thumbnail { max-width: 200px; display: none; margin: 20px auto; border: 1px solid #ccc; }
+        .result-box { background: #f4f4f4; padding: 10px; border-radius: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Загрузка PNG изображения</h2>
+    <input type="file" id="imageInput" accept="image/png">
+    <br><br>
+    <img id="thumbnail" alt="Preview">
+    
+    <div id="result" class="result-box">Выберите файл...</div>
+
+    <script>
+        const input = document.getElementById('imageInput');
+        const resultDiv = document.getElementById('result');
+        const thumb = document.getElementById('thumbnail');
+
+        // Восстановление состояния (усложнение)
+        const lastData = localStorage.getItem('lastImageInfo');
+        if (lastData) resultDiv.innerText = "Последний результат: " + lastData;
+
+        input.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Отображение Thumbnail (усложнение)
+            thumb.src = URL.createObjectURL(file);
+            thumb.style.display = 'block';
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            resultDiv.innerText = "Загрузка...";
+
+            try {
+                // Асинхронная отправка (усложнение)
+                const response = await fetch('/size2json', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                const output = JSON.stringify(data);
+                resultDiv.innerText = output;
+
+                // Сохранение состояния (усложнение)
+                localStorage.setItem('lastImageInfo', output);
+            } catch (err) {
+                resultDiv.innerText = "Ошибка соединения с сервером";
+            }
+        };
+    </script>
+</body>
+</html>
